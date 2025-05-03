@@ -152,7 +152,10 @@ const fetchTopLanguages = async (
       Math.pow(repoNodes[name].count, count_weight);
   });
 
+  const excludedLangs = ["CSS", "SCSS", "Perl"];
+
   const topLangs = Object.keys(repoNodes)
+    .filter((lang) => !excludedLangs.includes(lang))
     .sort((a, b) => repoNodes[b].size - repoNodes[a].size)
     .reduce((result, key) => {
       result[key] = repoNodes[key];
